@@ -16,7 +16,8 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NamesList() {
-    val categories: List<CategorizedNames> = names.map {
+    val categories: List<CategorizedNames> = names.groupBy { it.first() }
+        .toSortedMap().map {
         CategorizedNames(
             title = it.key.toString(),
             names = it.value
@@ -107,5 +108,3 @@ val names = listOf(
     "Shirley Davis", "Donald Lee", "Mary Lee", "Edward Robinson", "Linda Smith",
     "Thomas Walker", "Laura Davis", "Joseph Lee", "Nancy Young", "William"
 )
-    .groupBy { it.first() }
-    .toSortedMap()
